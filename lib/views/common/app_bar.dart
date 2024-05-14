@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_sathi/constants/app_constants.dart';
+import 'package:job_sathi/views/common/app_style.dart';
+import 'package:job_sathi/views/common/exports.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, this.text, this.child, this.actions});
+  final String? text;
+  final Widget? child; 
+  final List<Widget>? actions;
+
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return AppBar(
+      iconTheme: const IconThemeData(),
+      backgroundColor: Color(kLight.value),
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      leadingWidth: 70.w,
+      leading: Padding(
+        padding: EdgeInsets.only(left: 20.w),
+        child: Image.asset("assets/images/logo.png"),
+      ),
+      actions:actions,
+      centerTitle: true,
+      title: ReusableText(
+        text: text ?? "",
+        style: appstyle(20, Color(kDark.value), FontWeight.w600),
+      ),
+    );
   }
 }
