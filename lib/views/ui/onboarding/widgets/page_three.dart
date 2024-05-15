@@ -26,7 +26,7 @@ class PageThree extends StatelessWidget {
             Image.asset("assets/images/page3.png"),
             const HeightSpacer(size: 20),
             ReusableText(
-                text: "Welcome To JobHub",
+                text: "Welcome To JobSathi",
                 style: appstyle(30, Color(kLight.value), FontWeight.w600)),
             const HeightSpacer(size: 15),
             Padding(

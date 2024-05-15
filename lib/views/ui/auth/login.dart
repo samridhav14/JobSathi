@@ -11,6 +11,7 @@ import 'package:job_sathi/views/common/custom_textfield.dart';
 import 'package:job_sathi/views/common/height_spacer.dart';
 import 'package:job_sathi/views/common/reusable_text.dart';
 import 'package:job_sathi/views/ui/auth/signup.dart';
+import 'package:job_sathi/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: password,
                     keyboardType: TextInputType.text,
                     hintText: "Password",
-                    obscureText: true,
+                    obscureText: loginNotifier.obscureText,
                     validator: (password) {
                       if (password!.isEmpty || password.length < 7) {
                         return "Please enter a valid password";
@@ -90,10 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     suffixIcon: GestureDetector(
                       onTap: () {
-                       
+                        loginNotifier.toggleObscureText(!loginNotifier.obscureText);
                       },
                       child: Icon(
-                        Icons.visibility,
+                         (loginNotifier.obscureText==true)?Icons.visibility_off:Icons.visibility,
                         color: Color(kDark.value),
                       ),
                     ),
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        Get.offAll(() => const RegistrationPage());
+                        Get.to(() => const RegistrationPage());
                       },
                       child: ReusableText(
                           text: "Register",
@@ -114,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   const HeightSpacer(size: 50),
                   CustomButton(
                     onTap: () {
-                     
+                     Get.to(()=>const MainScreen());
                     },
                     text: "Login",
                   )
@@ -125,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
 
                   
     

@@ -20,8 +20,8 @@ class CustomAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       leadingWidth: 70.w,
       leading: Padding(
-        padding: EdgeInsets.only(left: 20.w),
-        child: Image.asset("assets/images/logo.png"),
+        padding: EdgeInsets.only(left: 5.w),
+        child: child,
       ),
       actions:actions,
       centerTitle: true,
