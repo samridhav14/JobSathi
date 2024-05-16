@@ -37,7 +37,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       "Home",
                       0,
                       zoomNotifier.currentIndex == 0
-                          ? Color(kLightBlue.value)
+                          ? Color(kDark.value)
                           : Color(kLightGrey.value),
                     ),
                     drawerItem(
@@ -45,7 +45,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       "Chat",
                       1,
                       zoomNotifier.currentIndex == 1
-                          ? Color(kLightBlue.value)
+                          ? Color(kDark.value)
                           : Color(kLightGrey.value),
                     ),
                     drawerItem(
@@ -53,7 +53,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       "Bookmarks",
                       2,
                       zoomNotifier.currentIndex == 2
-                          ? Color(kLightBlue.value)
+                          ? Color(kDark.value)
                           : Color(kLightGrey.value),
                     ),
                     drawerItem(
@@ -61,7 +61,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       "Device Mgmt",
                       3,
                       zoomNotifier.currentIndex == 3
-                          ? Color(kLightBlue.value)
+                          ? Color(kDark.value)
                           : Color(kLightGrey.value),
                     ),
                     drawerItem(
@@ -69,7 +69,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       "Profile",
                       4,
                       zoomNotifier.currentIndex == 4
-                          ? Color(kLightBlue.value)
+                          ? Color(kDark.value)
                           : Color(kLightGrey.value),
                     ),
                   ]),

@@ -7,15 +7,16 @@ class DeviceManagement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(preferredSize:const Size.fromHeight(50), 
-      child: CustomAppBar(
-       
-        child: const Padding(
-          padding:  EdgeInsets.all(12.0),
-          child: DrawerWidget(),
+    return const Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: CustomAppBar(
+          text: 'Device Management',
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: DrawerWidget(),
+          ),
         ),
-      ),
       ),
     );
   }

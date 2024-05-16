@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:job_sathi/views/common/app_bar.dart';
 import 'package:job_sathi/views/common/drawer/drawer_widget.dart';
 
@@ -16,6 +15,7 @@ class _BookMarkPageState extends State<BookMarkPage> {
     return const Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(50), 
       child: CustomAppBar(
+        text: 'Bookmarks',
         child:  Padding(
           padding:  EdgeInsets.all(12.0),
           child: DrawerWidget(),
