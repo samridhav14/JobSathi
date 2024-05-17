@@ -7,6 +7,7 @@ import 'package:job_sathi/views/common/exports.dart';
 import 'package:job_sathi/views/common/heading_widget.dart';
 import 'package:job_sathi/views/common/height_spacer.dart';
 import 'package:job_sathi/views/common/search.dart';
+import 'package:job_sathi/views/ui/jobs/job_page.dart';
 import 'package:job_sathi/views/ui/jobs/jobs_list.dart';
 import 'package:job_sathi/views/ui/jobs/widgets/horizontal_tile.dart';
 import 'package:job_sathi/views/ui/jobs/widgets/job_tile.dart';
@@ -33,6 +34,7 @@ class _HomePageState extends State<HomePage> {
               backgroundImage:  AssetImage("assets/images/user.png"),
             )
           )
+          
         ],
         child: const Padding(
           padding:  EdgeInsets.all(12.0),
@@ -76,8 +78,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return JobHorizontalTile(
                           onTap: () {
-                            // Get.to(() => JobPage(
-                            //     title: job.company, id: job.id));
+                             Get.to(() => const JobPage(
+                                title:'Facebook', id: '1'));
                           },
                           // job: job,
                         );
