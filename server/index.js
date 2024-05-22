@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGOURI)
   .catch(err => console.error('Could not connect to MongoDB...'));
 app.use(express.json())
 app.use("/api/", authRoutes) //localhost:3000/api/
-app.use("/api/user", userRoutes) //localhost:3000/api/user/id
+app.use("/api/users", userRoutes) //localhost:3000/api/user/id
+
 
 app.listen(process.env.PORT || 3000, () => console.log(`Example app listening on port ${process.env.PORT || 3000}!`))

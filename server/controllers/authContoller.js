@@ -28,14 +28,15 @@ module.exports = {
   loginUser: async (req, res) => {
     try {
       const user = await User.findOne({ email: req.body.email });
+      
       !user && res.status(401).json("Wrong credentials!");
       const decryptedpass = CryptoJs.AES.decrypt(
         user.password,
         process.env.SECRET
       );
+      
       const depassword = decryptedpass.toString(CryptoJs.enc.Utf8);
-      depassword !== req.body.password &&
-        res.status(401).json("Wrong credentials!");
+      depassword !== req.body.password && res.status(401).json("Wrong credentials!");
       // we use spread operator to get all the properties of the user object except the password we dont want to send the password to the client
       const userToken = jwt.sign(
          {
@@ -43,10 +44,11 @@ module.exports = {
            isAdmin: user.isAdmin,
            isAgent: user.isAgent,
          },
-         process.env.JWT_SEC,
+         process.env.SECRET,
          { expiresIn: '21d' }
        );
-     res.cookie("token", token, { httpOnly: true });
+
+     //res.cookie("token", token, { httpOnly: true });
       const { password, __v, createdAt, ...info } = user._doc;
       res.status(200).json({ info, userToken});
     } catch (err) {
