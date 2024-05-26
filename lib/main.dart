@@ -3,15 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/controllers/exports.dart';
+import 'package:job_sathi/views/ui/auth/login.dart';
+import 'package:job_sathi/views/ui/mainscreen.dart';
 import 'package:job_sathi/views/ui/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'views/common/exports.dart';
-
+Widget defaultHome = const OnBoardingScreen();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- 
+ final SharedPreferences prefs = await SharedPreferences.getInstance();
+ final entrypoint = prefs.getBool('entrypoint')??false;
+ final loggedIN=prefs.getBool('loggedIn')??false;
+  if(entrypoint && !loggedIN){
+    defaultHome=const LoginPage();
+  }
+  else if(entrypoint && loggedIN){
+    defaultHome=const MainScreen();
+  }
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => OnBoardNotifier()),
     ChangeNotifierProvider(create: (context) => LoginNotifier()),
@@ -40,13 +51,13 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Dbestech JobHub',
+            title: 'JobSathi',
             theme: ThemeData(
               scaffoldBackgroundColor: Color(kLight.value),
               iconTheme: IconThemeData(color: Color(kDark.value)),
               primarySwatch: Colors.grey,
             ),
-            home: const OnBoardingScreen(),
+            home: defaultHome,
           );
         });
   }
