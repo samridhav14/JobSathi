@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/controllers/login_provider.dart';
 import 'package:job_sathi/controllers/onboarding_provider.dart';
 import 'package:job_sathi/controllers/zoom_provider.dart';
+import 'package:job_sathi/main.dart';
 import 'package:job_sathi/views/common/app_bar.dart';
 import 'package:job_sathi/views/common/app_style.dart';
 import 'package:job_sathi/views/common/drawer/drawer_widget.dart';
 import 'package:job_sathi/views/common/height_spacer.dart';
 import 'package:job_sathi/views/common/reusable_text.dart';
+import 'package:job_sathi/views/ui/auth/login.dart';
 import 'package:job_sathi/views/ui/device_mgt/widgets/device_info.dart';
 import 'package:provider/provider.dart';
 
@@ -72,10 +76,10 @@ var zoomNotifier = Provider.of<ZoomNotifier>(context);
                   child: GestureDetector(
                     onTap: () {
                       zoomNotifier.currentIndex = 0;
-                      // loginNotifier.logout();
+                       loginNotifier.logout();
                       onBoarding.isLastPage = false;
-                      // defaultHome = const LoginPage();
-                      // Get.to(() => defaultHome);
+                       defaultHome = const LoginPage();
+                       Get.to(() => defaultHome);
                     },
                     child: Align(
                       alignment: Alignment.bottomCenter,

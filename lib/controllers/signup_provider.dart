@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:get/get.dart';
+import 'package:job_sathi/constants/app_constants.dart';
+import 'package:job_sathi/models/request/auth/signup_model.dart';
+import 'package:job_sathi/services/helpers/auth_helper.dart';
+import 'package:job_sathi/views/ui/auth/login.dart';
 
 class SignUpNotifier extends ChangeNotifier {
 // trigger to hide and unhide the password
   bool _obscureText = true;
-   get obscureText => _obscureText;
+  get obscureText => _obscureText;
   void toggleObscureText(bool value) {
     _obscureText = value;
     notifyListeners();
   }
+
 // triggered when the login button is clicked to show the loading widget
   bool _processing = false;
 
@@ -33,12 +37,12 @@ class SignUpNotifier extends ChangeNotifier {
   final signupFormKey = GlobalKey<FormState>();
 
   bool passwordValidator(String password) {
-  if (password.isEmpty) return false;
-  String pattern =
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-  RegExp regex = RegExp(pattern);
-  return regex.hasMatch(password);
-}
+    if (password.isEmpty) return false;
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(password);
+  }
 
   bool validateAndSave() {
     final form = signupFormKey.currentState;
@@ -50,4 +54,21 @@ class SignUpNotifier extends ChangeNotifier {
     }
   }
 
+  upSignUp(SignupModel model) async {
+    AuthHelper.signup(model).then((response) {
+      if (response) {
+        Get.off(
+          ()=>const LoginPage(),
+          transition: Transition.fade,
+          duration: const Duration(seconds: 2),
+        );
+
+      } else {
+        Get.snackbar("Sign up Failed", "Please Check your credentials",
+            colorText: Color(kLight.value),
+            backgroundColor: Colors.red,
+            icon: const Icon(Icons.add_alert));
+      }
+    });
+  }
 }

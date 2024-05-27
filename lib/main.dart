@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Color(kDark.value)),
               primarySwatch: Colors.grey,
             ),
-            home: const PersonalDetails(),
+            home: defaultHome,
           );
         });
   }
