@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/controllers/exports.dart';
+import 'package:job_sathi/firebase_options.dart';
 import 'package:job_sathi/views/ui/auth/login.dart';
+import 'package:job_sathi/views/ui/auth/update_user.dart';
 import 'package:job_sathi/views/ui/mainscreen.dart';
 import 'package:job_sathi/views/ui/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +17,9 @@ Widget defaultHome = const OnBoardingScreen();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ); 
  final SharedPreferences prefs = await SharedPreferences.getInstance();
  final entrypoint = prefs.getBool('entrypoint')??false;
  final loggedIN=prefs.getBool('loggedIn')??false;
@@ -57,7 +63,7 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Color(kDark.value)),
               primarySwatch: Colors.grey,
             ),
-            home: defaultHome,
+            home: const PersonalDetails(),
           );
         });
   }

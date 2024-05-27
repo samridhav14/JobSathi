@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "903836606133",
+    "project_id": "jobsathi-59f64",
+    "storage_bucket": "jobsathi-59f64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903836606133:android:64f61b85d77bc6de6ea8fc",
+        "android_client_info": {
+          "package_name": "com.example.job_sathi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs5FLvKeAEaXCG2R77i2huCp06y__jZJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

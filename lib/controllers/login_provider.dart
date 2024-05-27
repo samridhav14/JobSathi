@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginNotifier extends ChangeNotifier {
   bool _obscureText = true;
   bool get obscureText => _obscureText;
+
+  get profileFormKey => null;
   void toggleObscureText(bool value) {
     _obscureText = value;
     notifyListeners();
@@ -45,11 +47,7 @@ class LoginNotifier extends ChangeNotifier {
 
   bool validateAndSave() {
     final form = loginFormKey.currentState;
-    if(form==null) {
-      return false;
-
-      }
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       return true;
     } else {
@@ -73,7 +71,6 @@ class LoginNotifier extends ChangeNotifier {
             icon: const Icon(Icons.add_alert));
       }
     } catch (e) {
-      print(e);
       Get.snackbar("Error", "An error occurred during login",
           colorText: Colors.white,
           backgroundColor: Colors.red,

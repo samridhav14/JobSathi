@@ -12,7 +12,6 @@ import 'package:job_sathi/views/common/custom_textfield.dart';
 import 'package:job_sathi/views/common/height_spacer.dart';
 import 'package:job_sathi/views/common/reusable_text.dart';
 import 'package:job_sathi/views/ui/auth/signup.dart';
-import 'package:job_sathi/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -64,7 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                     const HeightSpacer(size: 30),
                     ReusableText(
                         text: "Welcome Back!",
-                        style: appstyle(30, Color(kDark.value), FontWeight.w600)),
+                        style:
+                            appstyle(30, Color(kDark.value), FontWeight.w600)),
                     ReusableText(
                         text: "Fill the details to login to your account",
                         style: appstyle(
@@ -125,9 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                     CustomButton(
                       onTap: () {
                         if (loginNotifier.validateAndSave()) {
-                         LoginModel model = LoginModel(
-                            email: email.text.trim(), password: password.text.trim()); 
+                          LoginModel model = LoginModel(
+                              email: email.text.trim(),
+                              password: password.text.trim());
                           loginNotifier.userLogin(model);
+                        
                         } else {
                           Get.snackbar(
                               "Login Failed", "Please check your credentials",

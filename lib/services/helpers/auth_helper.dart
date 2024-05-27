@@ -10,7 +10,6 @@ class AuthHelper {
  
   static var client = https.Client();
   static Future<bool>login(LoginModel model)async{
-    print(jsonEncode(model));
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
     };

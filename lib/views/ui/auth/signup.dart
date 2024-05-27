@@ -45,7 +45,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   text: "SignUp",
                   child: GestureDetector(
                     onTap: () {
-                     print("Hello");
                       Get.back();
                     },
                     child: const Icon(CupertinoIcons.arrow_left),
