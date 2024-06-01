@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:provider/provider.dart';
+
 import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/controllers/image_provider.dart';
 import 'package:job_sathi/controllers/login_provider.dart';
@@ -14,7 +16,6 @@ import 'package:job_sathi/views/common/custom_btn.dart';
 import 'package:job_sathi/views/common/custom_textfield.dart';
 import 'package:job_sathi/views/common/height_spacer.dart';
 import 'package:job_sathi/views/common/reusable_text.dart';
-import 'package:provider/provider.dart';
 
 class PersonalDetails extends StatefulWidget {
   const PersonalDetails({super.key});
@@ -63,8 +64,8 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                     builder: (context, imageUploader, child) {
                       return imageUploader.imageFile.isEmpty
                           ? GestureDetector(
-                              onTap: () {
-                                imageUploader.pickImage();
+                              onTap: () async{
+                                await imageUploader.pickImage();
                               },
                               child: CircleAvatar(
                                 backgroundColor: Color(kLightBlue.value),

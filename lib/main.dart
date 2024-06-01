@@ -6,8 +6,6 @@ import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/controllers/exports.dart';
 import 'package:job_sathi/firebase_options.dart';
 import 'package:job_sathi/views/ui/auth/login.dart';
-import 'package:job_sathi/views/ui/auth/update_user.dart';
-import 'package:job_sathi/views/ui/mainscreen.dart';
 import 'package:job_sathi/views/ui/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +25,8 @@ void main() async {
     defaultHome=const LoginPage();
   }
   else if(entrypoint && loggedIN){
-    defaultHome=const MainScreen();
+    // defaultHome=const MainScreen();
+    defaultHome=const LoginPage();
   }
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => OnBoardNotifier()),
@@ -63,7 +62,7 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Color(kDark.value)),
               primarySwatch: Colors.grey,
             ),
-            home: defaultHome,
+            home:defaultHome,
           );
         });
   }

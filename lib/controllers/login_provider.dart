@@ -91,6 +91,7 @@ class LoginNotifier extends ChangeNotifier {
     await prefs.setBool('loggedIn', false);
     await prefs.remove('token');
     _firstTime = false;
+    loginFormKey.currentState!.reset();
     notifyListeners();
   }
   

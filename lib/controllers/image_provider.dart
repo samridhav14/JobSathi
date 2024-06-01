@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,25 +9,25 @@ import 'package:job_sathi/constants/app_constants.dart';
 import 'package:uuid/uuid.dart';
 
 class ImageUploader extends ChangeNotifier {
-  var uid = Uuid();
+  var uid = const Uuid();
   final ImagePicker _picker = ImagePicker();
 
   List<String> imageFile = [];
   String? imageUrl;
   String? imagePath;
-  void pickImage() async {
-    // ignore: no_leading_underscores_for_local_identifiers
+  pickImage() async {
 
     XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
 
     if (_imageFile != null) {
-      // Crop the image
 
       _imageFile = await cropImage(_imageFile);
       if (_imageFile != null) {
         imageFile.add(_imageFile.path);
           uploadImage(_imageFile);
         imagePath = _imageFile.path;
+        log(imageUrl!);
+        log(imagePath!);
       } else {
         return;
       }
@@ -72,12 +73,7 @@ class ImageUploader extends ChangeNotifier {
         .child("${uid.v1()}.jpg");
     await ref.putFile(image);
     imageUrl = await ref.getDownloadURL();
+    notifyListeners();
     return imageUrl;
   }
-  //  imageUpload() async {
-  //   final ref =
-  //       FirebaseStorage.instance.ref().child('jobhub').child('${uid}jpg');
-  //   await ref.putFile(imageUrl[0]);
-  //   imageUrl = await ref.getDownloadURL();
-  // }
 }
