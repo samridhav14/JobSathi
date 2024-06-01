@@ -75,7 +75,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                 ),
                               ),
                             )
-                          : GestureDetector(
+                          : imageUploader.imageUrl==null?const CircularProgressIndicator() :GestureDetector(
                               onTap: () {
                                 imageUploader.imageFile.clear();
                                 setState(() {});

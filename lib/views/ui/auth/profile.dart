@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/controllers/exports.dart';
 import 'package:job_sathi/models/response/auth/profile_model.dart';
@@ -13,6 +15,7 @@ import 'package:job_sathi/views/common/drawer/drawer_widget.dart';
 import 'package:job_sathi/views/common/height_spacer.dart';
 import 'package:job_sathi/views/common/reusable_text.dart';
 import 'package:job_sathi/views/common/width_spacer.dart';
+import 'package:job_sathi/views/ui/auth/profile_update.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -125,8 +128,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // profile = UserData.skills;
-                                    // Get.to(() => ProfileUpdate());
+                                    profile= UserData.skills;
+                                     Get.to(() => const ProfileUpdate());
                                   },
                                   child: const Icon(
                                     Feather.edit,
