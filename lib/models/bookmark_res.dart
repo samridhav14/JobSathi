@@ -28,7 +28,7 @@ class BookmarkResModel {
         job: json["job"],
         userId: json["userId"],
         title: json["title"],
-        imageUrl: json["imageUrl"],
+        imageUrl: json["imageUrls"],
         company: json["company"],
         location: json["location"],
     );
