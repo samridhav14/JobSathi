@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:job_sathi/controllers/jobs_provider.dart';
 import 'package:job_sathi/models/response/jobs/jobs_response.dart';
 import 'package:job_sathi/views/common/app_bar.dart';
-import 'package:job_sathi/views/common/vertical_tile.dart';
+import 'package:job_sathi/views/ui/jobs/widgets/job_tile.dart';
 import 'package:provider/provider.dart';
 
 class JobListPage extends StatelessWidget {
@@ -43,7 +43,7 @@ class JobListPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final jobs = job[index];
-                      return VerticalTileWidget(jobs: jobs,onTap: (){},);
+                      return VerticalTileWidget(job: jobs);
                     }),
               );
             }
