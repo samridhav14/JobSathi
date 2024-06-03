@@ -10,7 +10,7 @@ class GetJobRes {
         required this.title,
         required this.location,
         required this.company,
-        required this.hiring,
+      //  required this.hiring,
         required this.description,
         required this.salary,
         required this.period,
@@ -18,14 +18,14 @@ class GetJobRes {
         required this.requirements,
         required this.imageUrl,
         required this.agentId,
-        required this.updatedAt,
+       // required this.updatedAt,
     });
 
     final String id;
     final String title;
     final String location;
     final String company;
-    final bool hiring;
+   // final bool hiring;
     final String description;
     final String salary;
     final String period;
@@ -33,22 +33,22 @@ class GetJobRes {
     final List<String> requirements;
     final String imageUrl;
     final String agentId;
-    final DateTime updatedAt;
+   // final DateTime updatedAt;
 
     factory GetJobRes.fromJson(Map<String, dynamic> json) => GetJobRes(
         id: json["_id"],
         title: json["title"],
         location: json["location"],
         company: json["company"],
-        hiring: json["hiring"],
+       // hiring: json["hiring"],
         description: json["description"],
         salary: json["salary"],
         period: json["period"],
         contract: json["contract"],
         requirements: List<String>.from(json["requirements"].map((x) => x)),
-        imageUrl: json["imageUrl"],
+        imageUrl: json["imageUrls"],
         agentId: json["agentId"],
-        updatedAt: DateTime.parse(json["updatedAt"]),
+       // updatedAt: DateTime.parse(json["updatedAt"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -56,7 +56,7 @@ class GetJobRes {
         "title": title,
         "location": location,
         "company": company,
-        "hiring": hiring,
+       // "hiring": hiring,
         "description": description,
         "salary": salary,
         "period": period,
@@ -64,6 +64,6 @@ class GetJobRes {
         "requirements": List<dynamic>.from(requirements.map((x) => x)),
         "imageUrl": imageUrl,
         "agentId": agentId,
-        "updatedAt": updatedAt.toIso8601String(),
+       // "updatedAt": updatedAt.toIso8601String(),
     };
 }

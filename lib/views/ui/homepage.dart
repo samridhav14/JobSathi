@@ -100,9 +100,9 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         job: job,
                                       );
-                                    });
+                                    },);
                               }
-                            })),
+                            },),),
                     const HeightSpacer(size: 20),
                     HeadingWidget(
                       text: "Recently Posted",
