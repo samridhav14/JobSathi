@@ -1,16 +1,14 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as https;
-import 'package:job_sathi/models/request/chat/create_chat.dart';
-import 'package:job_sathi/models/response/chat/get_chat.dart';
-import 'package:job_sathi/models/response/chat/initial_msg.dart';
+import 'package:job_sathi/models/request/messaging/send_message.dart';
+import 'package:job_sathi/models/response/messaging/messaging_res.dart';
 import 'package:job_sathi/services/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ChatHelper {
-    static var client = https.Client();
-    // apply for job
-     static Future<List<dynamic>> apply(CreateChat model) async {
+class MessagingHelper {
+  static var client = https.Client();
+  static Future<List<dynamic>> sendMessage(SendMessage model) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 
@@ -19,23 +17,22 @@ class ChatHelper {
       'token': 'Bearer $token'
     };
 
-    var url = Uri.https(Config.apiUrl, Config.chatsUrl);
-    var response = await client.post(
-      url,
-      headers: requestHeaders,
-      body: jsonEncode(model.toJson())
-    );
+    var url = Uri.https(Config.apiUrl, Config.messagingUrl);
+    var response = await client.post(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
 
     if (response.statusCode == 200) {
-      var first=initialChatFromJson(response.body).id;
-     return [true, first]; 
+      ReceivedMessge message =
+          ReceivedMessge.fromJson(jsonDecode(response.body));
+      Map<String, dynamic> responseMap = jsonDecode(response.body);
+      return [true, message, responseMap];
     } else {
       return [false];
     }
   }
   // get conversation
-  
-     static Future<List<GetChats>> getConversation() async {
+
+  static Future<List<dynamic>> getMessages(String chatId, int offset) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 
@@ -44,17 +41,17 @@ class ChatHelper {
       'token': 'Bearer $token'
     };
 
-    var url = Uri.https(Config.apiUrl, Config.chatsUrl);
+    var url = Uri.https(Config.apiUrl, Config.messagingUrl);
     var response = await client.get(
       url,
       headers: requestHeaders,
     );
 
     if (response.statusCode == 200) {
-      var chats=getChatsFromJson(response.body);
-     return chats; 
+      var messages = receivedMessgeFromJson(response.body);
+      return  messages;
     } else {
-      throw Exception('Failed to load chats');
+      throw Exception('Failed to load messages');
     }
   }
 }
