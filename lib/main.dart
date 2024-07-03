@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:job_sathi/constants/app_constants.dart';
-import 'package:job_sathi/controllers/exports.dart';
 import 'package:job_sathi/firebase_options.dart';
 import 'package:job_sathi/views/ui/auth/login.dart';
 import 'package:job_sathi/views/ui/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'controllers/exports.dart';
 import 'views/common/exports.dart';
 Widget defaultHome = const OnBoardingScreen();
 
@@ -37,6 +37,7 @@ void main() async {
     ChangeNotifierProvider(create: (context) => BookMarkNotifier()),
     ChangeNotifierProvider(create: (context) => ImageUploader()),
     ChangeNotifierProvider(create: (context) => ProfileNotifier()),
+    ChangeNotifierProvider(create: (context) => ChatNotifier()),
   ], child: const MyApp()));
 }
 

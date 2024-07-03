@@ -1,57 +1,77 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as https;
 import 'package:job_sathi/models/request/messaging/send_message.dart';
 import 'package:job_sathi/models/response/messaging/messaging_res.dart';
 import 'package:job_sathi/services/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MessagingHelper {
-  static var client = https.Client();
-  static Future<List<dynamic>> sendMessage(SendMessage model) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+class MesssagingHelper {
+  static https.Client client = https.Client();
 
-    Map<String, String> requestHeaders = {
+  // Apply for job
+  static Future<List<dynamic>> sendMessage(SendMessage model) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    final requestHeaders = <String, String>{
       'Content-Type': 'application/json',
-      'token': 'Bearer $token'
+      'token': 'Bearer $token',
     };
 
-    var url = Uri.https(Config.apiUrl, Config.messagingUrl);
-    var response = await client.post(url,
-        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    final url = Uri.http(Config.apiUrl, Config.messagingUrl);
+    final response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model.toJson()),
+    );
+
 
     if (response.statusCode == 200) {
-      ReceivedMessge message =
-          ReceivedMessge.fromJson(jsonDecode(response.body));
-      Map<String, dynamic> responseMap = jsonDecode(response.body);
+      final message = ReceivedMessge.fromJson(jsonDecode(response.body));
+
+      final Map<String, dynamic> responseMap = jsonDecode(response.body);
       return [true, message, responseMap];
     } else {
       return [false];
     }
   }
-  // get conversation
 
-  static Future<List<dynamic>> getMessages(String chatId, int offset) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+  // FIX: added try-catch
+  static Future<List<ReceivedMessge>> getMessages(
+    String chatId,
+    int offset,
+  ) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
 
-    Map<String, String> requestHeaders = {
-      'Content-Type': 'application/json',
-      'token': 'Bearer $token'
-    };
+      final requestHeaders = <String, String>{
+        'Content-Type': 'application/json',
+        'token': 'Bearer $token',
+      };
 
-    var url = Uri.https(Config.apiUrl, Config.messagingUrl);
-    var response = await client.get(
-      url,
-      headers: requestHeaders,
-    );
+      final url = Uri.http(
+        Config.apiUrl,
+        '${Config.messagingUrl}/$chatId',
+        {'page': offset.toString()},
+      );
+      final response = await client.get(
+        url,
+        headers: requestHeaders,
+      );
 
-    if (response.statusCode == 200) {
-      var messages = receivedMessgeFromJson(response.body);
-      return  messages;
-    } else {
-      throw Exception('Failed to load messages');
+      if (response.statusCode == 200) {
+        final messages = receivedMessgeFromJson(response.body);
+
+        return messages;
+      } else {
+        throw Exception(' failed to load messages');
+      }
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      rethrow;
     }
   }
 }

@@ -6,3 +6,4 @@ export 'package:job_sathi/controllers/onboarding_provider.dart';
 export 'package:job_sathi/controllers/profile_provider.dart';
 export 'package:job_sathi/controllers/signup_provider.dart';
 export 'package:job_sathi/controllers/zoom_provider.dart';
+export 'package:job_sathi/controllers/chat_provider.dart';

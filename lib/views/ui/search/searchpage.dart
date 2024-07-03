@@ -5,6 +5,7 @@ import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/models/response/jobs/jobs_response.dart';
 import 'package:job_sathi/services/helpers/jobs_helper.dart';
 import 'package:job_sathi/views/common/exports.dart';
+import 'package:job_sathi/views/common/loader.dart';
 import 'package:job_sathi/views/common/vertical_tile.dart';
 import 'package:job_sathi/views/ui/search/widgets/custom_field.dart';
 
@@ -54,17 +55,7 @@ class _SearchPageState extends State<SearchPage> {
               return Center(child: ReusableText(text: "Error: ${snapshot.error}", style: appstyle(16, Color(kDark.value), FontWeight.w600),),);
             }
             else if(snapshot.data!.isEmpty){
-              return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.h,
-          ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/optimized_search.png"),
-                ReusableText(text: "No Jobs Found", style: appstyle(24, Color(kDark.value), FontWeight.w600),),
-                 ],
-            )
-          );
+              return const Loader();
             }
             final jobs = snapshot.data;
              return ListView.builder(

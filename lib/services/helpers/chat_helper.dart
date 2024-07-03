@@ -35,7 +35,7 @@ class ChatHelper {
   }
   // get conversation
   
-     static Future<List<GetChats>> getConversation() async {
+     static Future<List<GetChats>> getConversations() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 

@@ -4,6 +4,8 @@ import 'package:job_sathi/constants/app_constants.dart';
 import 'package:job_sathi/models/request/auth/login_model.dart';
 import 'package:job_sathi/models/request/auth/profile_update_model.dart';
 import 'package:job_sathi/services/helpers/auth_helper.dart';
+import 'package:job_sathi/views/ui/auth/profile.dart';
+import 'package:job_sathi/views/ui/auth/profile_update.dart';
 import 'package:job_sathi/views/ui/auth/update_user.dart';
 import 'package:job_sathi/views/ui/mainscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,7 +70,7 @@ class LoginNotifier extends ChangeNotifier {
       
       bool response = await AuthHelper.login(model);
       if (response && firstTime) {
-        Get.off(() => const PersonalDetails());
+        Get.off(() => const MainScreen());
       } else if (response && !firstTime) {
         Get.off(() => const MainScreen());
       } 
